@@ -1,0 +1,14 @@
+body {
+    display: flex;
+    min-width: 100vh;
+    flex-direction: column;
+}
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+.loader {
+    margin: 0 auto;
+}
