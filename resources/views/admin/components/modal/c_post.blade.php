@@ -1,27 +1,31 @@
 <div id="post-modal" class="modal">
     <div class="modal-content">
         <h4>Add Post</h4>
-        <form action="" method="POST">
+        {!! Form::open(['method'=>'POST', 'action'=>['App\Http\Controllers\AdminPostsController@store'], 'files' => true]) !!}
             <div class="input-field">
-                <input type="text">
-                <label>Title</label>
+                <input name='title' type="text">
+                <label for="title">Title</label>
             </div>
-            <div class="input-field ">
-                <select id="category">
-                    <option value="">Select option</option>
-                    <option value="1">Web Development</option>
-                    <option value="2">Graphic Design</option>
-                    <option value="3">Others</option>
-                </select>
-                <label for="category"></label>
+            <div class="input-field">
+                {!! Form::select('category_id', ['' => 'Choose Category'], null) !!}
+                {!! Form::label('category_id', 'Category') !!}
             </div>
             <div class="input-field">
                 <textarea name="body" id="body" class="materialize-textarea"></textarea>
                 <label for="body">Body</label>
             </div>
-        </form>
-        <div class="modal-footer">
-            <a href="#!" class="modal-action modal-close btn blue white-text">Submit</a>
-        </div>
+            <div class="file-field input-field">
+                <div class="btn">
+                    <span>User Image</span>
+                    <input name="photo" type="file" tabindex="3">
+                </div>
+                    <div class="file-path-wrapper">
+                    <input type="text" class="file-path" tabindex="4">
+                </div>
+            </div>
+            <div class="modal-footer">
+                {!! Form::submit('Create Post', ['class'=>'modal-action modal-close btn blue white-text']) !!}
+            </div>
+        {!! Form::close() !!}
     </div>
 </div>

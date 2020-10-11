@@ -63,6 +63,10 @@ class User extends Authenticatable
         return $this->belongsTo(Photo::class);
     }
 
+    public function posts() {
+        return $this->hasMany(Post::class);
+    }
+
     public function setPasswordAttribute($password) {
         if (!empty($password)) {
             $this->attributes['password'] = bcrypt($password);

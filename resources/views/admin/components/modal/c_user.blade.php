@@ -16,7 +16,7 @@
                 {!! Form::label('password', 'Password') !!}
             </div>
             <div class="input-field">
-                {!! Form::select('is_active', [1 => 'Active', 0 => 'Not Active' ], 0) !!}
+                {!! Form::select('is_active', [0 => 'Not Active', 1 => 'Active' ], 0) !!}
                 {!! Form::label('is_active', 'Status') !!}
             </div>
             <div class="input-field">

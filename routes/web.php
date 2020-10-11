@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\AdminUsersController;
+use App\Http\Controllers\AdminPostsController;
 use App\Http\Middleware\Admin;
 
 
@@ -38,5 +39,5 @@ Route::middleware([Admin::class])->group(function () {
     Route::get('/admin/users/{id}/toggle_active', [AdminUsersController::class, 'toggleActive']);
     // Posts Routes
     Route::resource('admin/posts', AdminPostsController::class);
-    
+
 });
