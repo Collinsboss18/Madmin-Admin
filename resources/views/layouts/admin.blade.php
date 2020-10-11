@@ -23,12 +23,12 @@
                 <i class="fa fa-bars fa-2x"></i>
             </a>
             <ul class="right hide-on-med-and-down">
-                <li class="active"><a href="index.html">Dashboard</a></li>
+                <li class="active"><a href="{{ URL::to('admin') }}">Dashboard</a></li>
                 <li><a href="#">Posts</a></li>
                 <li><a href="#">Categories</a></li>
                 <li><a href="#">Posts</a></li>
                 <li><a href="#">Comments</a></li>
-                <li><a href="#">Users</a></li>
+                <li><a href="{{ URL::action('App\Http\Controllers\AdminUsersController@index') }}">Users</a></li>
             </ul>
             <!-- SideNav -->
             <ul id="side-nav" class="side-nav">
@@ -48,12 +48,12 @@
                         </a>
                     </div>
                 </li>
-                <li><a href="index.html"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="{{ URL::to('admin') }}"><i class="fa fa-dashcube"></i> Dashboard</a></li>
                 <li><a href="#">Posts</a></li>
                 <li><a href="#">Categories</a></li>
                 <li><a href="#">Posts</a></li>
                 <li><a href="#">Comments</a></li>
-                <li><a href="#">Users</a></li>
+                <li><a href="{{ URL::action('App\Http\Controllers\AdminUsersController@index') }}">Users</a></li>
                 <li><div class="divider"></div></li>
                 <li><a href="#" class="subheader">Account Controls</a></li>
                 <li><a href="#" class="waves-effect">Logout</a></li>
@@ -119,7 +119,7 @@
 <div id="user-modal" class="modal">
     <div class="modal-content">
         <h4>Add User</h4>
-        {!! Form::open(['method'=>'POST', 'action'=>'App\Http\Controllers\AdminUsersController@store']) !!}
+        {!! Form::open(['method'=>'POST', 'action'=>['App\Http\Controllers\AdminUsersController@store'], 'files' => true]) !!}
             {{-- {{ csrf_token() }} --}}
             <div class="input-field">
                 {!! Form::text('name', null) !!}
@@ -144,7 +144,7 @@
             <div class="file-field input-field">
                 <div class="btn">
                     <span>User Image</span>
-                    <input name="image" type="file" tabindex="3">
+                    <input name="photo" type="file" tabindex="3">
                 </div>
                     <div class="file-path-wrapper">
                     <input type="text" class="file-path" tabindex="4">
@@ -170,6 +170,7 @@
 
 
 @if(count($errors) > 0)
+    {{ print_r($errors) }}
     <script>
         Materialize.toast('Please fill all field input', 4000);
     </script>

@@ -20,6 +20,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role_id',
+        'photo_id',
+        'is_active'
     ];
 
     /**
@@ -48,5 +51,14 @@ class User extends Authenticatable
      */
     public function role() {
         return $this->belongsTo('App/Role');
+    }
+
+    /**
+     * The attributes that should be cast to native types.
+     * Photo -> Relation
+     * @var function
+     */
+    public function photo() {
+        return $this->belongsTo('App\Photo');
     }
 }
