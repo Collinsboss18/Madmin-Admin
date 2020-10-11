@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UsersRequest;
 use App\Models\User;
 use App\Models\Role;
@@ -24,16 +25,6 @@ class AdminUsersController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\UsersRequest  $request
@@ -48,7 +39,7 @@ class AdminUsersController extends Controller
             if ($request->file('photo')->isValid()) {
                 $photo = $request->file('photo');
                 $name = time().'_'.$photo->getClientOriginalName();
-                $photo->move('img/users', $name);
+                $photo->move('assets/img/users', $name);
                 $c_photo = Photo::create(['file'=>$name]);
                 $input['photo_id'] = $c_photo->id;
             }
@@ -70,29 +61,6 @@ class AdminUsersController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -101,5 +69,27 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function toggleActive(Request $request, $id)
+    {
+        //
+        $user = User::findOrFail($id);
+        if ($user->is_active !== null) {
+            $user->is_active > 0 ? $user->is_active = 0 : $user->is_active = 1;
+        }
+        $user->save();
+        return redirect()->back();
+    }
+
+    public function toggleAdmin(Request $request, $id)
+    {
+        //
+        $user = User::findOrFail($id);
+        if ($user->role_id !== null) {
+            $user->role_id !== 1 ? $user->role_id = 1 : $user->role_id = 2;
+        }
+        $user->save();
+        return redirect()->back();
     }
 }

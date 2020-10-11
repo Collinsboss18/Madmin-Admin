@@ -23,8 +23,8 @@
                         </thead>
                         <tbody>
                             @if($users)
+                                @php $a = 1; @endphp
                                 @foreach($users as $user)
-                                    @php $a = 1; @endphp
                                     <tr>
                                         <td>{{ $a }}</td>
                                         <td>{{ $user->name }}</td>
@@ -39,14 +39,20 @@
                                         <td>{{ $user->created_at->diffForHumans() }}</td>
                                         <td>
                                             @if($user->is_active)
-                                            <a href="#" class="btn btn-small orange waves-effect waves-light lighten-2">Disable User</a>
+                                            <a href="{{ URL::to('admin/users/'. $user->id .'/toggle_active') }}" class="btn btn-small orange waves-effect waves-light lighten-2">Disable User</a>
                                             @else
-                                            <a href="#" class="btn btn-small blue waves-effect waves-light lighten-2">Enable User</a>
+                                            <a href="{{ URL::to('admin/users/'. $user->id .'/toggle_active') }}" class="btn btn-small blue waves-effect waves-light lighten-2">Enable User</a>
                                             @endif
                                         </td>
-                                        <td><a href="#" class="btn btn-small blue waves-effect waves-light lighten-2">Make Admin</a></td>
+                                        <td>
+                                            @if($user->role_id === 1)
+                                            <a href="{{ URL::to('admin/users/'. $user->id .'/toggle_admin') }}" class="btn btn-small blue waves-effect waves-light lighten-3">Rmv Admin</a>
+                                            @else
+                                            <a href="{{ URL::to('admin/users/'. $user->id .'/toggle_admin') }}" class="btn btn-small orange waves-effect waves-light lighten-2">Make Admin</a>
+                                            @endif
+                                        </td>
                                     </tr>
-                                    @php $a = +1; @endphp
+                                    @php $a++ @endphp
                                 @endforeach
                             @endif
                         </tbody>

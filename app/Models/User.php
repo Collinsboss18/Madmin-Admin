@@ -50,7 +50,7 @@ class User extends Authenticatable
      * @var function
      */
     public function role() {
-        return $this->belongsTo('App/Role');
+        return $this->belongsTo(Role::class);
     }
 
     /**
@@ -59,6 +59,6 @@ class User extends Authenticatable
      * @var function
      */
     public function photo() {
-        return $this->belongsTo('App\Photo');
+        return $this->belongsTo(Photo::class);
     }
 }

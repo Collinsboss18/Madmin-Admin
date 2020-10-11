@@ -30,6 +30,8 @@ Route::get('/admin', function () {
     return view('admin\index');
 });
 Route::resource('admin/users', AdminUsersController::class);
+Route::get('admin/users/{id}/toggle_admin', [AdminUsersController::class, 'toggleAdmin']);
+Route::get('admin/users/{id}/toggle_active', [AdminUsersController::class, 'toggleActive']);
 
 Auth::routes();
 
