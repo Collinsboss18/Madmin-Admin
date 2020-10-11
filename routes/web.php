@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\AdminUsersController;
+use App\Http\Middleware\Admin;
 
 
 
@@ -18,21 +19,24 @@ use App\Http\Controllers\AdminUsersController;
 |
 */
 
+
+Auth::routes();
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/admin', function () {
-    return view('admin\index');
+Route::middleware([Admin::class])->group(function () {
+    Route::get('admin', function () {
+        return view('admin.index');
+    });
+    // Users Routes
+    Route::resource('admin/users', AdminUsersController::class);
+    Route::get('/admin/users/{id}/toggle_admin', [AdminUsersController::class, 'toggleAdmin']);
+    Route::get('/admin/users/{id}/toggle_active', [AdminUsersController::class, 'toggleActive']);
+    // Posts Routes
+    Route::resource('admin/posts', AdminPostsController::class);
+    
 });
-Route::resource('admin/users', AdminUsersController::class);
-Route::get('admin/users/{id}/toggle_admin', [AdminUsersController::class, 'toggleAdmin']);
-Route::get('admin/users/{id}/toggle_active', [AdminUsersController::class, 'toggleActive']);
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

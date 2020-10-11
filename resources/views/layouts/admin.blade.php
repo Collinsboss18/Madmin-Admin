@@ -6,8 +6,19 @@
 <main class="container">
     @yield('content')
 </main>
-<!-- Modals -->
-@include('admin.components.modal')
+{{-- Flash Messages --}}
+@if(count($errors) > 0)
+    @foreach($errors->all() as $error)
+        <script>
+            Materialize.toast('{{ $error }}', 4000);
+        </script>
+    @endforeach
+@endif
+@if(Session::has('msg'))
+    <script>
+        Materialize.toast("{{ session('msg') }}", 4000);
+    </script>
+@endif
 <!-- Preloader -->
 @include('admin.components.preloader')
 <!-- Scripts -->

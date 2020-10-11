@@ -27,7 +27,8 @@ class UsersRequest extends FormRequest
             //
             'name'=>'required|string|min:5|max:40',
             'email'=>'required|email',
-            'password'=>'required'
+            'password'=>'required',
+            'photo'=>'required'
         ];
     }
 }

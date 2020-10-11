@@ -44,20 +44,9 @@ class AdminUsersController extends Controller
                 $input['photo_id'] = $c_photo->id;
             }
         };
-        $input['password'] = bcrypt($request->password);
         User::create($input);
+        $request->session()->flash('msg', 'Created new user successful');
         return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -69,8 +58,15 @@ class AdminUsersController extends Controller
     public function destroy($id)
     {
         //
+
     }
 
+    /**
+     * Toggle is_active row
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function toggleActive(Request $request, $id)
     {
         //
@@ -79,9 +75,16 @@ class AdminUsersController extends Controller
             $user->is_active > 0 ? $user->is_active = 0 : $user->is_active = 1;
         }
         $user->save();
+        $request->session()->flash('msg', 'Changed user active state');
         return redirect()->back();
     }
 
+    /**
+     * Change user role_id
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function toggleAdmin(Request $request, $id)
     {
         //
@@ -90,6 +93,7 @@ class AdminUsersController extends Controller
             $user->role_id !== 1 ? $user->role_id = 1 : $user->role_id = 2;
         }
         $user->save();
+        $request->session()->flash('msg', 'Changed user admin state');
         return redirect()->back();
     }
 }

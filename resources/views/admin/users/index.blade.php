@@ -29,7 +29,7 @@
                                         <td>{{ $a }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
-                                        <td></td>
+                                        <td>{{ $user->role->name }}</td>
                                         <td>@if($user->is_active)
                                             <i class="fa fa-check-circle fa-2x green-text" />
                                             @else
@@ -68,4 +68,8 @@
 <div class="fixed-action-btn">
     <a title="Create User" href="#user-modal" class="modal-trigger btn-floating btn-large blue"><i class="fa fa-plus"></i></a>
 </div>
+
+
+<!-- Modals -->
+@include('admin.components.modal.c_user')
 @endsection
