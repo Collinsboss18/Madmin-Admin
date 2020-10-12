@@ -35,7 +35,15 @@
                 <li><a href="{{ URL::action('App\Http\Controllers\AdminCategoriesController@index') }}">Categories</a></li>
                 <li><div class="divider"></div></li>
                 <li><a href="#" class="subheader">Account Controls</a></li>
-                <li><a href="#" class="waves-effect">Logout</a></li>
+                <li><a class="dropdown-item" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                        {{ __('Logout') }}
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
+                </li>
             </ul>
         </div>
     </div>

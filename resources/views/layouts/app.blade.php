@@ -3,68 +3,91 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
+    <title>{{ config('app.name', 'MadMin Admin Laravel') }}</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/materialize.min.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/js/materialize.min.js"></script>
+    <script src="/assets/js/script.js"></script>
 </head>
-<body>
+<body id="home" class="grey lighten-4">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="blue darken-2">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
+                <div class="nav-wrapper">
+                    <a href="index.html" class="brand-logo">Madmin</a>
+                    <a href="#" data-activates="side-nav" class="button-collapse show-on-large right">
+                        <i class="fa fa-bars fa-2x"></i>
+                    </a>
+                    <ul class="right hide-on-med-and-down">
                         @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
+                            <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
                             @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
+                                <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                            <li><a href="#!">{{ Auth::user()->name }}</a></li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
                                 </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                        @endguest
+                    </ul>
+                    <!-- SideNav -->
+                    <ul id="side-nav" class="side-nav">
+                        @guest
+                            <li>
+                                <div class="user-view">
+                                    <div class="background">
+                                        <img src="/assets/img/ocean.jpg" alt="">
+                                    </div>
+                                    <a href="#">
+                                        <span class="name white-text">MadMin Admin</span>
                                     </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
                                 </div>
+                            </li>
+                            <li><a href="{{ route('login') }}">{{ __('Login') }}</a></li>
+                            @if (Route::has('register'))
+                                <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
+                            @endif
+                        @else
+                            <li>
+                                <div class="user-view">
+                                    <div class="background">
+                                        <img src="/assets/img/ocean.jpg" alt="">
+                                    </div>
+                                    <a href="#">
+                                        <span class="name white-text">{{ Auth::user()->name }}</span>
+                                    </a>
+                                    <a href="#">
+                                        <span class="email white-text">{{ Auth::user()->email }}</span>
+                                    </a>
+                                </div>
+                            </li>
+                            <li><a href="#" class="subheader">Account Controls</a></li>
+                            <li><a class="dropdown-item" href="{{ route('logout') }}"
+                                    onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             </li>
                         @endguest
                     </ul>
@@ -76,5 +99,18 @@
             @yield('content')
         </main>
     </div>
+{{-- Flash Messages --}}
+@if(count($errors) > 0)
+    @foreach($errors->all() as $error)
+        <script>
+            Materialize.toast('{{ $error }}', 4000);
+        </script>
+    @endforeach
+@endif
+@if ( @session > 0)
+    <script>
+        Materialize.toast('{{ @session }}', 4000);
+    </script>
+@endif
 </body>
 </html>
