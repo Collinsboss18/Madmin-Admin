@@ -26,7 +26,7 @@
                                     <tr>
                                         <td>{{ $a }}</td>
                                         <td>{{ $post->user->name }}</td>
-                                        <td></td>
+                                        <td>{{ $post->category->name }}</td>
                                         <td>{{ $post->title }}</td>
                                         <td>{{ $post->created_at->diffForHumans() }}</td>
                                         <td><a href="{{ URL::action('App\Http\Controllers\AdminPostsController@edit', $post->id) }}" class="btn btn-small orange waves-effect waves-light lighten-2">More</a></td>

@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\PostsRequest;
 use App\Models\Post;
-use App\Models\User;
+use App\Models\Category;
 use App\Models\Photo;
 
 class AdminPostsController extends Controller
@@ -19,37 +20,27 @@ class AdminPostsController extends Controller
     {
         //
         $posts = Post::all();
-        return view('admin.posts.index', compact('posts'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $category = Category::pluck('name', 'id')->all();
+        return view('admin.posts.index', compact(['posts', 'category']));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\PostRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PostsRequest $request)
     {
         //
         $input = $request->all();
         $input['user_id'] = Auth::id();
-        $input['category_id'] = 1;
 
         if($request->hasFile('photo')) {
             if ($request->file('photo')->isValid()) {
                 $photo = $request->file('photo');
                 $name = time().'_'.$photo->getClientOriginalName();
-                $photo->move('assets/img/posts', $name);
+                $photo->move('assets/img', $name);
                 $c_photo = Photo::create(['file'=>$name]);
                 $input['photo_id'] = $c_photo->id;
             }
@@ -57,17 +48,6 @@ class AdminPostsController extends Controller
         Post::create($input);
         $request->session()->flash('msg', 'Created new post successful');
         return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -79,18 +59,37 @@ class AdminPostsController extends Controller
     public function edit($id)
     {
         //
+        $post = Post::findOrFail($id);
+        $category = Category::pluck('name', 'id')->all();
+        return view('admin.posts.edit', compact(['post', 'category']));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\PostsRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostsRequest $request, $id)
     {
         //
+        $user = Post::findOrFail($id);
+        $input = $request->all();
+        $input['user_id'] = Auth::id();
+
+        if($request->hasFile('photo')) {
+            if ($request->file('photo')->isValid()) {
+                $photo = $request->file('photo');
+                $name = time().'_'.$photo->getClientOriginalName();
+                $photo->move('assets/img', $name);
+                $c_photo = Photo::create(['file'=>$name]);
+                $input['photo_id'] = $c_photo->id;
+            }
+        }
+        $user->update($input);
+        $request->session()->flash('msg', 'Post update successful');
+        return redirect()->back();
     }
 
     /**
@@ -102,5 +101,9 @@ class AdminPostsController extends Controller
     public function destroy($id)
     {
         //
+        $post = Post::findOrFail($id);
+        unlink(public_path().$post->photo->file);
+        $post->delete();
+        return redirect('/admin/posts');
     }
 }

@@ -10,7 +10,6 @@
                 <li><a href="{{ URL::action('App\Http\Controllers\AdminUsersController@index') }}">Users</a></li>
                 <li><a href="{{ URL::action('App\Http\Controllers\AdminPostsController@index') }}">Posts</a></li>
                 <li><a href="#">Categories</a></li>
-                <li><a href="#">Comments</a></li>
             </ul>
             <!-- SideNav -->
             <ul id="side-nav" class="side-nav">

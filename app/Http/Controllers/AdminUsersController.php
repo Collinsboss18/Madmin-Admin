@@ -39,7 +39,7 @@ class AdminUsersController extends Controller
             if ($request->file('photo')->isValid()) {
                 $photo = $request->file('photo');
                 $name = time().'_'.$photo->getClientOriginalName();
-                $photo->move('assets/img/users', $name);
+                $photo->move('assets/img', $name);
                 $c_photo = Photo::create(['file'=>$name]);
                 $input['photo_id'] = $c_photo->id;
             }

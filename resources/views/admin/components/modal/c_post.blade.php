@@ -7,7 +7,7 @@
                 <label for="title">Title</label>
             </div>
             <div class="input-field">
-                {!! Form::select('category_id', ['' => 'Choose Category'], null) !!}
+                {!! Form::select('category_id', ['' => 'Choose Category'] + $category ? $category :'', null) !!}
                 {!! Form::label('category_id', 'Category') !!}
             </div>
             <div class="input-field">
