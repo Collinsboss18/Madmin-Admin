@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\AdminPostsController;
 use App\Http\Controllers\AdminCategoriesController;
@@ -31,9 +32,7 @@ Route::get('/', function () {
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::middleware([Admin::class])->group(function () {
-    Route::get('admin', function () {
-        return view('admin.index');
-    });
+    Route::get('admin', [AdminController::class, 'index']);
     // Users Routes
     Route::resource('admin/users', AdminUsersController::class);
     Route::get('/admin/users/{id}/toggle_admin', [AdminUsersController::class, 'toggleAdmin']);

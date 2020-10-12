@@ -6,10 +6,10 @@
                 <i class="fa fa-bars fa-2x"></i>
             </a>
             <ul class="right hide-on-med-and-down">
-                <li class="active"><a href="{{ URL::to('admin') }}">Dashboard</a></li>
+                <li class=""><a href="{{ URL::to('admin') }}">Dashboard</a></li>
                 <li><a href="{{ URL::action('App\Http\Controllers\AdminUsersController@index') }}">Users</a></li>
                 <li><a href="{{ URL::action('App\Http\Controllers\AdminPostsController@index') }}">Posts</a></li>
-                <li><a href="#">Categories</a></li>
+                <li><a href="{{ URL::action('App\Http\Controllers\AdminCategoriesController@index') }}">Categories</a></li>
             </ul>
             <!-- SideNav -->
             <ul id="side-nav" class="side-nav">
@@ -32,8 +32,7 @@
                 <li><a href="{{ URL::to('admin') }}"><i class="fa fa-dashcube"></i> Dashboard</a></li>
                 <li><a href="{{ URL::action('App\Http\Controllers\AdminUsersController@index') }}">Users</a></li>
                 <li><a href="{{ URL::action('App\Http\Controllers\AdminPostsController@index') }}">Posts</a></li>
-                <li><a href="#">Categories</a></li>
-                <li><a href="#">Comments</a></li>
+                <li><a href="{{ URL::action('App\Http\Controllers\AdminCategoriesController@index') }}">Categories</a></li>
                 <li><div class="divider"></div></li>
                 <li><a href="#" class="subheader">Account Controls</a></li>
                 <li><a href="#" class="waves-effect">Logout</a></li>

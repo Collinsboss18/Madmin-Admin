@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\CategoriesRequest;
+use App\Models\User;
+use App\Models\Role;
+use App\Models\Post;
+use App\Models\Photo;
 use App\Models\Category;
 
-class AdminCategoriesController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,22 +19,44 @@ class AdminCategoriesController extends Controller
     public function index()
     {
         //
+        $users = User::all();
+        $posts = Post::all();
         $categories = Category::all();
-        return view('admin.categories.index', compact('categories'));
+        $roles = Role::pluck('name', 'id')->all();
+        $category = Category::pluck('name', 'id')->all();
+        return view('admin.index', compact(['users', 'posts', 'categories', 'roles', 'category']));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\CategoriesRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoriesRequest $request)
+    public function store(Request $request)
     {
         //
-        Category::create($request->all());
-        $request->session()->flash('msg', 'Create category successful');
-        return redirect()->back();
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
     }
 
     /**
@@ -43,24 +68,18 @@ class AdminCategoriesController extends Controller
     public function edit($id)
     {
         //
-        $category = Category::findOrFail($id);
-        return view('admin.categories.edit', compact('category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\CategoriesRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CategoriesRequest $request, $id)
+    public function update(Request $request, $id)
     {
         //
-        $category = Category::findOrFail($id);
-        $category->update($request->all());
-        $request->session()->flash('msg', 'Category updated');
-        return redirect()->back();
     }
 
     /**
@@ -72,7 +91,5 @@ class AdminCategoriesController extends Controller
     public function destroy($id)
     {
         //
-        Category::findOrFail($id)->delete();
-        return redirect('/admin/categories');
     }
 }
