@@ -6,6 +6,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'MadMin Admin Laravel') }}</title>
+    {{-- Icon --}}
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicon.png">
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Fonts -->
@@ -36,7 +38,7 @@
                                 <li><a href="{{ route('register') }}">{{ __('Register') }}</a></li>
                             @endif
                         @else
-                            <li><a href="#!">{{ Auth::user()->name }}</a></li>
+                            <li><a href="/home">Go Home {{ Auth::user()->name }}</a></li>
                             <li><a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
@@ -71,10 +73,10 @@
                                     <div class="background">
                                         <img src="/assets/img/ocean.jpg" alt="">
                                     </div>
-                                    <a href="#">
+                                    <a href="/home">
                                         <span class="name white-text">{{ Auth::user()->name }}</span>
                                     </a>
-                                    <a href="#">
+                                    <a href="/home">
                                         <span class="email white-text">{{ Auth::user()->email }}</span>
                                     </a>
                                 </div>

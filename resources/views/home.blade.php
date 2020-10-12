@@ -15,7 +15,7 @@
                     @endif
 
                     {{ __('You are logged in!') }}
-                    @if(Auth::user()->role_id === 1)
+                    @if(Auth::user()->role_id === 1 && Auth::user()->is_active)
                         <a href="/admin" class="btn">Visit Dashboard</a>
                     @endif
                 </div>

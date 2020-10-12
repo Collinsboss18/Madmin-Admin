@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Photo;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // Using composer to make variables global
+        view()->composer('*', function($view) {
+            $view->with('profile', Photo::where('id', Auth::user()->photo_id)->get(['file']));
+        });
     }
 }

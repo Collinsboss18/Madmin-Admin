@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UsersRequest;
 use App\Models\User;
@@ -19,7 +20,7 @@ class AdminUsersController extends Controller
     public function index()
     {
         //
-        $users = User::all();
+        $users = User::all()->except(Auth::id());
         $roles = Role::pluck('name', 'id')->all();
         return view('admin.users.index', compact(['users', 'roles']));
     }

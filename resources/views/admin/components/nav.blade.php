@@ -1,7 +1,7 @@
 <nav class="blue darken-2">
     <div class="container">
         <div class="nav-wrapper">
-            <a href="index.html" class="brand-logo">Madmin</a>
+            <a href="/" class="brand-logo">Madmin</a>
             <a href="#" data-activates="side-nav" class="button-collapse show-on-large right">
                 <i class="fa fa-bars fa-2x"></i>
             </a>
@@ -19,13 +19,22 @@
                             <img src="/assets/img/ocean.jpg" alt="">
                         </div>
                         <a href="#">
-                            <img class="circle" src="/assets/img/person1.jpg" alt="">
+                            @isset(Auth::user()->photo_id)
+                                @isset($profile)
+                                    @foreach($profile as $photo => $file)
+                                        <img class="circle" src="{{ $file->file }}" alt="">
+                                    @endforeach
+                                @endisset
+                            @endisset
+                            @if(empty(Auth::user()->photo_id))
+                                <img class="circle" src="/assets/img/person1.png" alt="">
+                            @endif
                         </a>
                         <a href="#">
-                            <span class="name white-text">John Doe</span>
+                            <span class="name white-text">{{ Auth::user()->name }}</span>
                         </a>
                         <a href="#">
-                            <span class="email white-text">jdoe@gmail.com</span>
+                            <span class="email white-text">{{ Auth::user()->email }}</span>
                         </a>
                     </div>
                 </li>

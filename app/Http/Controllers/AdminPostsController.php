@@ -67,13 +67,20 @@ class AdminPostsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\PostsRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(PostsRequest $request, $id)
+    public function update(Request $request, $id)
     {
         //
+        $rules = [
+            'title'=>'required',
+            'category_id'=>'required',
+            'body'=>'required'
+        ];
+        $this->validate($request, $rules);
+
         $user = Post::findOrFail($id);
         $input = $request->all();
         $input['user_id'] = Auth::id();

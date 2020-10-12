@@ -29,7 +29,7 @@
             <div class="card-panel blue lighten-1 white-text center">
                 <i class="fa fa-comments fa-2x"></i>
                 <h5>Categories</h5>
-                <h3 class="count">{{ count($categories) > 0 ? count($categories) : 'No Category' }}</h3>
+                <h3 class="count">{{ $categories > 0 ? $categories : 'No Category' }}</h3>
                 <div class="progress grey lighten-1">
                     <div class="determinate white" style="width: 40%;"></div>
                 </div>
@@ -39,7 +39,7 @@
             <div class="card-panel center">
                 <i class="fa fa-users fa-2x"></i>
                 <h5>Users</h5>
-                <h3 class="count">{{ count($users) > 0 ? count($users) : 'No User' }}</h3>
+                <h3 class="count">{{ $users > 0 ? $users : 'No User' }}</h3>
                 <div class="progress grey lighten-1">
                     <div class="determinate blue" style="width: 30%;"></div>
                 </div>

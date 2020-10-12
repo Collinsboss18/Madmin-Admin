@@ -19,7 +19,7 @@
                             <label for="title">Title</label>
                         </div>
                         <div class="input-field">
-                            {!! Form::select('category_id', $category ? $category :'', null) !!}
+                            {!! Form::select('category_id', $category ? $category :'', $post->category_id) !!}
                             {!! Form::label('category_id', 'Category') !!}
                         </div>
                         <div class="input-field">
