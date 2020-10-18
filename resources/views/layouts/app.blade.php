@@ -27,7 +27,7 @@
         <nav class="blue darken-2">
             <div class="container">
                 <div class="nav-wrapper">
-                    <a href="index.html" class="brand-logo">Madmin</a>
+                    <a href="/" class="brand-logo">Madmin</a>
                     <a href="#" data-activates="side-nav" class="button-collapse show-on-large right">
                         <i class="fa fa-bars fa-2x"></i>
                     </a>

@@ -8,6 +8,13 @@ use App\Models\Photo;
 
 class AppServiceProvider extends ServiceProvider
 {
+    public function photoId() {
+        if(Auth::check()){
+            return Photo::where('id', Auth::user()->photo_id)->get(['file']);
+        }
+        return '';
+    }
+
     /**
      * Register any application services.
      *
@@ -27,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
     {
         // Using composer to make variables global
         view()->composer('*', function($view) {
-            $view->with('profile', Photo::where('id', Auth::user()->photo_id)->get(['file']));
+            $view->with('profile', $this->photoId());
         });
     }
 }
