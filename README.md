@@ -1,18 +1,21 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+## Madmin Dashboard (Laravel & Blade Template)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 ## About Project
 
-A Laravel project building an Admin Dashboard with CRUD functionallty on User, Post, Category Schema using Materialize-CSS for the Front-end template.
+A Laravel project building an Admin Dashboard, using **Controllers, Middleware, Requests, Providers, Blade Template...**
 
-*LARAVEL DOC* https://laravel.com/docs/8.x/readme
-[Laravel](https://laravel.com/docs/8.x/readme)
+> Project Sample
 
-*Materialize-CSS* https://materializecss.com/
-[Materialize-CSS](https://materializecss.com/)
+<img src="public/assets/img/madmin-showcase.gif">
+
+#### Technologies
+
+_PHP_
+
+_LARAVEL DOC_ - [Laravel](https://laravel.com/docs/8.x/readme)
+
+_Materialize-CSS_ - [Materialize-CSS](https://materializecss.com/)
+
+> Project By Collins Abadaike collinspro18@gmail.com
