@@ -109,7 +109,7 @@
         </script>
     @endforeach
 @endif
-{{-- @if ( @session ?? '' ?? '' !== null)
+{{-- @if(@session)
     <script>
         Materialize.toast('{{ @session }}', 4000);
     </script>

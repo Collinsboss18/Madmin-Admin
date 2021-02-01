@@ -21,7 +21,7 @@ class AdminController extends Controller
     {
         //
         $users = User::all()->count();
-        $posts = Post::all();
+        $posts = Post::all()->count();
         $categories = Category::all()->count();
         $roles = Role::pluck('name', 'id')->all();
         $category = Category::pluck('name', 'id')->all();
