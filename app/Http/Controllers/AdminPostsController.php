@@ -45,9 +45,9 @@ class AdminPostsController extends Controller
                 $input['photo_id'] = $c_photo->id;
             }
         };
-        Post::create($input);
+        $cPost = Post::create($input);
         $request->session()->flash('msg', 'Created new post successful');
-        return redirect()->back();
+        return redirect('admin/posts/'.$cPost->id.'/edit');
     }
 
     /**
